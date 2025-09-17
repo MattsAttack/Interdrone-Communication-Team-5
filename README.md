@@ -15,3 +15,8 @@ For the current implementation, you should also create a .env file containing yo
 3. Add your ip to the end of it (found by running ipconfig in the terminal)
 
 With these steps complete, your enviorment should be good to go!
+
+
+# How to run the project
+1. Run the server.py file in one terminal using **python server.py**
+2. Run the client.py file in another terminal using **python client.py**
