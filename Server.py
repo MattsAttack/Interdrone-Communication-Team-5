@@ -1,3 +1,5 @@
+# May want to look into using udp instead
+# Maybe look into apis for socket servers
 import socket
 
 # Temp code to allow for .env file for local testing
@@ -7,7 +9,7 @@ import os
 load_dotenv()
 
 # Sub out to read config file. Using env for local testing
-host = os.getenv("IP_ADDRESS")
+host = os.getenv("IP_HOST")
 port = 12345
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
