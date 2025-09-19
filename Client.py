@@ -3,10 +3,13 @@ import time
 
 
 class Client:
+    # Client Class constructor. Used to pass in JSON Data
     def __init__(self, jsonData):
         # TODO Update to create a list of drones to ping
         self.jsonData = jsonData
 
+    # Start client and try to send messages to servers
+    # TODO. Once drone list is implemented, split into setup and runtime functions
     def start_client(self):
         while True:
             try:
@@ -20,6 +23,7 @@ class Client:
                 print("no connection secured")
                 time.sleep(5)
 
+    # Send data to server based on IP and Port
     def send_data(self, serverIP: str, serverPort: int):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
             client_socket.connect((serverIP, serverPort))
