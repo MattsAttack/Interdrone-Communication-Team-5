@@ -1,17 +1,18 @@
 import threading
 import server
 import client
-import logging
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(threadName)s - %(levelname)s - %(message)s",
-)
+import json
+
+# Get JSON Data
+# TODO implement JSON class for easier data access
+with open("config.json", "r") as file:
+    data: dict[str, object] = json.load(file)
+
 
 # Instantiate Server and Client
-serverInstance = server.Server()
-clientInstance = client.Client()
+serverInstance = server.Server(jsonData=data)
+clientInstance = client.Client(jsonData=data)
 
 # Create threads properly (don't call the functions with parentheses)
 serverThread = threading.Thread(target=serverInstance.start_server, name="ServerThread")

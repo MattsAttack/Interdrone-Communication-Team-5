@@ -1,22 +1,24 @@
 import socket
 import time
 
-# Temp code to allow for .env file for local testing
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-
-HOST = os.getenv("IP_HOST")  # The server's hostname or IP address
-PORT = 12345  # The port used by the server
-
 
 class Client:
+    def __init__(self, jsonData):
+        # TODO Update to create a list of drones to ping
+        self.jsonData = jsonData
+
     def start_client(self):
         while True:
-            print("starting thread")
-            self.send_data(serverIP="10.110.5.136", serverPort=12345)
-            time.sleep(5)
+            try:
+                # TODO update to send messages to clients based on drone list
+                self.send_data(
+                    serverIP=str(self.jsonData["drones"]["drone2"]["ip"]),
+                    serverPort=int(self.jsonData["drones"]["drone2"]["port"]),
+                )
+                time.sleep(5)
+            except:
+                print("no connection secured")
+                time.sleep(5)
 
     def send_data(self, serverIP: str, serverPort: int):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:

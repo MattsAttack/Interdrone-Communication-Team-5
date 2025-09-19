@@ -1,25 +1,23 @@
+# Server is just writing data to a file
+
 # May want to look into using udp instead
-# Maybe look into apis for socket servers
 import socket
-
-# Temp code to allow for .env file for local testing
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-
-# Sub out to read config file. Using env for local testing
-HOST = os.getenv("IP_HOST")
-PORT = 12345
 
 
 class Server:
+    def __init__(self, jsonData):
+        self.jsonData = jsonData
+
     def start_server(self):
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server_socket.bind((HOST, PORT))
+        # Update to take specific drone value (EX: Drone 2)
+        server_socket.bind(
+            (
+                str(self.jsonData["drones"]["drone1"]["ip"]),
+                int(self.jsonData["drones"]["drone1"]["port"]),
+            )
+        )
         server_socket.listen(5)
-
-        print(f"Server listening on {HOST}:{PORT}")
 
         try:
             while True:
